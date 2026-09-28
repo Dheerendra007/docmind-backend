@@ -3,14 +3,16 @@ services:
     image: pgvector/pgvector:pg16
     container_name: doc-mind-postgres
     restart: unless-stopped
+
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: docmind
+
     ports:
       - "5434:5432"
-    volumes:
 
+    volumes:
       - ytpgdata:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
@@ -19,6 +21,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  
+
 volumes:
   ytpgdata:
