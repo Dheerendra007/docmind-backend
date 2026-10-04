@@ -74,4 +74,27 @@ public class GlobalExceptionHandler {
                         .timestamp(LocalDateTime.now())
                         .build());
     }
+
+    @ExceptionHandler (IllegalArgumentException.class)
+    public ResponseEntity<APIResponse<Object>> handleIllegalArgumentException(IllegalArgumentException ex) {
+        logger.error("Invalid argument: {}", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(APIResponse.builder()
+                        .success(false)
+                        .message("Invalid argument: " + ex.getMessage())
+                        .timestamp(LocalDateTime.now())
+                        .build());
+    }
+
+    @ExceptionHandler (Exception.class)
+    public ResponseEntity<APIResponse<Object>> handleGenericException(Exception ex) {
+        logger.error("An unexpected error occurred: {}", ex.getMessage(), ex);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(APIResponse.builder()
+                        .success(false)
+                        .message("An unexpected error occurred")
+                        .timestamp(LocalDateTime.now())
+                        .build());
+    }
 }
