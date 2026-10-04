@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor 
 @AllArgsConstructor
 @Builder 
-public class APIResponse<T> {
+public class ApiResponse<T> {
     private boolean success;
     private String message;
     private T data;

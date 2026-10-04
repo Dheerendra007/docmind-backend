@@ -86,7 +86,8 @@ public class GlobalExceptionHandler {
                         .timestamp(LocalDateTime.now())
                         .build());
     }
-
+    
+    //Generalized exception handler for any other exceptions not specifically handled
     @ExceptionHandler (Exception.class)
     public ResponseEntity<APIResponse<Object>> handleGenericException(Exception ex) {
         logger.error("An unexpected error occurred: {}", ex.getMessage(), ex);
