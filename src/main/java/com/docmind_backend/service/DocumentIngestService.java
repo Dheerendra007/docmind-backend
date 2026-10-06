@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
 
 import com.docmind_backend.config.AppProperties;
@@ -27,8 +28,7 @@ public class DocumentIngestService {
     private final AppProperties appProperties;
     
     public int ingest(DocumentMetaData documentMetaData, List<Document> parsedDocuments) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ingest'");
+        
     }
 
 }
