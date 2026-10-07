@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.docmind_backend.config.AppProperties;
 import com.docmind_backend.entity.DocumentMetaData;
+import com.docmind_backend.entity.DocumentStatus;
 import com.docmind_backend.repository.DocumentMetaDataRepo;
 
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,13 @@ public class DocumentIngestService {
     private final AppProperties appProperties;
     
     public int ingest(DocumentMetaData documentMetaData, List<Document> parsedDocuments) {
+        logger.info("Ingesting document: {id={},name={},pages={}}", documentMetaData.getId(), documentMetaData.getFileName(), documentMetaData.getFileSize());
         
+        try{
+            documentMetaData.setStatus(DocumentStatus.PROCESSING);
+            
+        }
+        return parsedDocuments.size();
     }
 
 }
