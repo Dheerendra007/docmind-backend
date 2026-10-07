@@ -34,6 +34,9 @@ public class DocumentIngestService {
         try{
             documentMetaData.setStatus(DocumentStatus.PROCESSING);
             
+        }catch(Exception e){
+            logger.error("Error while updating document status to PROCESSING: {id={},name={},pages={}}", documentMetaData.getId(), documentMetaData.getFileName(), documentMetaData.getFileSize(), e);
+            return 0;
         }
         return parsedDocuments.size();
     }
