@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import com.docmind_backend.entity.DocumentMetaData;
 import com.docmind_backend.entity.DocumentStatus;
 import com.docmind_backend.repository.DocumentMetaDataRepo;
 
+import ch.qos.logback.core.subst.Token;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -33,7 +35,17 @@ public class DocumentIngestService {
         
         try{
             documentMetaData.setStatus(DocumentStatus.PROCESSING);
-            
+            documentMetaData.setTotalPages(parsedDocuments.size());
+
+            //1.Text chunking using token text splitter
+
+            TokenTextSplitter tokenTextSplitter = TokenTextSplitter.builder()
+                .withChunkSize(appProperties.getRag().getChunkSize())
+                .withMinChunkSize(appProperties.getRag().getMinChunkSize())
+                .withMinChunkLengthToEmbed(appProperties.getRag().getMinChunkLengthToEmbed())
+                .withMaxNumLength(appProperties.getRag().getMaxNumLength())
+                .withKeepSeparators(true)
+                .build();
         }catch(Exception e){
             logger.error("Error while updating document status to PROCESSING: {id={},name={},pages={}}", documentMetaData.getId(), documentMetaData.getFileName(), documentMetaData.getFileSize(), e);
             return 0;
