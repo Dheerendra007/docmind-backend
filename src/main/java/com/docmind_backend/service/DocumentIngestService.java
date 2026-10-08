@@ -40,11 +40,11 @@ public class DocumentIngestService {
             //1.Text chunking using token text splitter
 
             TokenTextSplitter tokenTextSplitter = TokenTextSplitter.builder()
-                .withChunkSize(appProperties.getRag().getChunkSize())
-                .withMinChunkSize(appProperties.getRag().getMinChunkSize())
-                .withMinChunkLengthToEmbed(appProperties.getRag().getMinChunkLengthToEmbed())
-                .withMaxNumLength(appProperties.getRag().getMaxNumLength())
-                .withKeepSeparators(true)
+                .withChunkSize(appProperties.getRegProperties().getChunkSize())
+                .withMinChunkSizeChars(appProperties.getRegProperties().getMinChunkSizeChars())
+                .withMinChunkLengthToEmbed(appProperties.getRegProperties().getMinChunkLengthToEmbed())
+                .withMaxNumChunks(appProperties.getRegProperties().getMaxNumChunks())
+                .withKeepSeparator(true)
                 .build();
         }catch(Exception e){
             logger.error("Error while updating document status to PROCESSING: {id={},name={},pages={}}", documentMetaData.getId(), documentMetaData.getFileName(), documentMetaData.getFileSize(), e);

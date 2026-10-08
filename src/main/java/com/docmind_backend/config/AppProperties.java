@@ -26,8 +26,11 @@ public class AppProperties {
     @AllArgsConstructor 
     @NoArgsConstructor 
     public static class RegProperties {
-        private int chunkSize;
-        private int chunkoverlap;
+        private int chunkSize = 600;
+        private int minChunkSizeChars = 350;
+        private int minChunkLengthToEmbed = 5;
+        private int maxNumChunks = 10000;
+        private int chunkoverlap = 100 ;
         private int topK=5;
         private double similarityThreshold=0.0;
 
