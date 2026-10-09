@@ -46,6 +46,7 @@ public class DocumentIngestService {
                 .withMaxNumChunks(appProperties.getRegProperties().getMaxNumChunks())
                 .withKeepSeparator(true)
                 .build();
+                System.out.println("TokenTextSplitter: " + tokenTextSplitter);
         }catch(Exception e){
             logger.error("Error while updating document status to PROCESSING: {id={},name={},pages={}}", documentMetaData.getId(), documentMetaData.getFileName(), documentMetaData.getFileSize(), e);
             return 0;
